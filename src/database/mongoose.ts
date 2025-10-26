@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGO_URI = process.env.MONGO_URI;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 declare global {
   var mongooseCache: {
@@ -16,20 +16,22 @@ if (!cached) {
 }
 
 export const connectToDatabase = async () => {
-  if (!MONGO_URI) throw new Error('MONGO_URI is not defined');
-  if (cached.conn) return cached.conn;
-  if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGO_URI, {
-      bufferCommands: false,
-    });
+  if (!MONGODB_URI) throw new Error('MONGODB_URI must be set within .env');
 
-    try {
-      cached.conn = await cached.promise;
-    } catch (error) {
-      cached.promise = null;
-      throw error;
-    }
+  if (cached.conn) return cached.conn;
+
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI, { bufferCommands: false });
   }
-  console.log(`Connecting to database ${process.env.NODE_ENV} - ${MONGO_URI}`);
+
+  try {
+    cached.conn = await cached.promise;
+  } catch (err) {
+    cached.promise = null;
+    throw err;
+  }
+
+  console.log(`Connected to database ${process.env.NODE_ENV} - ${MONGODB_URI}`);
+
   return cached.conn;
 };
