@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
 
-const UserDropdown = ({ user }: { user: User }) => {
+const UserDropdown = ({ user, initialStocks }: { user: User; initialStocks: StockWithWatchlistStatus[] }) => {
   const router = useRouter();
 
   const handleSignOut = async () => {
@@ -59,7 +59,7 @@ const UserDropdown = ({ user }: { user: User }) => {
         </DropdownMenuItem>
         <DropdownMenuSeparator className="hidden bg-gray-600 sm:block" />
         <nav className="sm:hidden">
-          <NavItems />
+          <NavItems initialStocks={initialStocks} />
         </nav>
       </DropdownMenuContent>
     </DropdownMenu>
