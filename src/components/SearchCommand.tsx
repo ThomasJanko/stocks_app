@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { CommandDialog, CommandEmpty, CommandInput, CommandList } from '@/components/ui/command';
 import { searchStocks } from '@/lib/actions/finnhub.actions';
-import { Loader2, TrendingUp } from 'lucide-react';
+import { Loader2, Star, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useDebounce } from '../hooks/useDebounce';
@@ -96,7 +96,7 @@ export default function SearchCommand({ renderAs = 'button', label = 'Add stock'
                         {stock.symbol} | {stock.exchange} | {stock.type}
                       </div>
                     </div>
-                    {/*<Star />*/}
+                    <Star />
                   </Link>
                 </li>
               ))}
