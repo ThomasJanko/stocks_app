@@ -4,6 +4,6 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: stocks_app
-    restart: unless-stopped
+    restart: always
     ports:
       - '8568:3000'
