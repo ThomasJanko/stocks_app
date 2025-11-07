@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stocks_app
+    restart: unless-stopped
+    ports:
+      - '8568:3000'
